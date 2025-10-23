@@ -1,0 +1,116 @@
+* {
+  /* box-sizing: border-box; */
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+.app-container {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f5f5;
+  overflow: hidden;
+}
+
+.header {
+  background-color: #0078ff;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+.chat-container {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: scroll;
+  min-height: calc(100vh - 154px); 
+  min-height: calc(100dvh - 154px); 
+  /* 154 = header height + chat container padding + footer height */
+}
+
+.message {
+  display: flex;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.bot {
+  justify-content: flex-start;
+}
+
+.bubble {
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  max-width: 70%;
+  position: relative;
+}
+
+.message.user .bubble {
+  background: #0078ff;
+  color: white;
+  border-bottom-right-radius: 0;
+}
+
+.message.bot .bubble {
+  background: #e9ecef;
+  border-bottom-left-radius: 0;
+}
+
+.time {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  display: block;
+  margin-top: 5px;
+}
+
+.user > .bubble > .time {
+  text-align: right;
+}
+
+.bot > .bubble > .time {
+  text-align: left;
+}
+
+.footer {
+  background: white;
+  border-top: 1px solid #ccc;
+  padding: 10px;
+}
+
+.footer form {
+  display: flex;
+  gap: 10px;
+}
+
+.footer input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+}
+
+.footer button {
+  background-color: #0078ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.footer button:hover {
+  background-color: #0065d1;
+}
