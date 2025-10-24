@@ -8,7 +8,7 @@ export function detectIntent(query) {
   const lowerQuery = query.toLowerCase();
 
   // Resume / Experience related
-  const resumeKeywords = ['resume', 'background', 'experience', 'cv', 'work history', 'cover letter', 'job', 'position'];
+  const resumeKeywords = ['resume', 'background', 'experience', 'cv', 'work history', 'cover letter', 'job', 'position', 'company'];
   if (resumeKeywords.some((word) => lowerQuery.includes(word))) {
     return 'Resume';
   }
