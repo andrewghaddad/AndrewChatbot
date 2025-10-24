@@ -14,13 +14,13 @@ export function detectIntent(query) {
   }
 
   // About me
-  const aboutKeywords = ['about', 'who are you', 'yourself', 'bio', 'biography', 'what is', 'name'];
+  const aboutKeywords = ['about', 'who', 'you', 'yourself', 'bio', 'biography', 'what is', 'name', 'college', 'major', 'minor', 'degree', 'graduate', 'grad'];
   if (aboutKeywords.some((word) => lowerQuery.includes(word))) {
     return 'AboutMe';
   }
 
   // Contact information
-  const contactKeywords = ['contact', 'email', 'phone', 'reach you', 'call', 'mobile', 'number', 'address', 'text'];
+  const contactKeywords = ['contact', 'email', 'phone', 'reach', 'call', 'mobile', 'number', 'address', 'text'];
   if (contactKeywords.some((word) => lowerQuery.includes(word))) {
     return 'Contact';
   }
