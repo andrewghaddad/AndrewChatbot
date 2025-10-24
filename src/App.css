@@ -30,9 +30,9 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  overflow: scroll;
-  min-height: calc(100vh - 154px); 
-  min-height: calc(100dvh - 154px); 
+  overflow-y: scroll;
+  max-height: calc(100vh - 154px); 
+  max-height: calc(100dvh - 154px); 
   /* 154 = header height + chat container padding + footer height */
 }
 
