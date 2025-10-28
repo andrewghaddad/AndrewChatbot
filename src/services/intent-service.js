@@ -1,30 +1,28 @@
+import OpenAI from "openai";
+import { prompt } from "../prompts";
 
-/**
- * Detects the user's intent based on simple keyword matching.
- * @param query User's input text
- * @returns Intent type
- */
-export function detectIntent(query) {
-  const lowerQuery = query.toLowerCase();
+const token = process.env.REACT_APP_GITHUB_TOKEN;
+const endpoint = "https://models.github.ai/inference";
+const model = "openai/gpt-4.1";
 
-  // Resume / Experience related
-  const resumeKeywords = ['resume', 'background', 'experience', 'cv', 'work history', 'cover letter', 'job', 'position', 'company'];
-  if (resumeKeywords.some((word) => lowerQuery.includes(word))) {
-    return 'Resume';
-  }
+export async function genAIResponse(query) {
+  if (query == null) return;
+  
+  const client = new OpenAI({ baseURL: endpoint, apiKey: token, dangerouslyAllowBrowser: true });
 
-  // About me
-  const aboutKeywords = ['about', 'who', 'you', 'yourself', 'bio', 'biography', 'what is', 'name', 'college', 'major', 'minor', 'degree', 'graduate', 'grad'];
-  if (aboutKeywords.some((word) => lowerQuery.includes(word))) {
-    return 'AboutMe';
-  }
+  const response = await client.chat.completions.create({
+    messages: [
+        { role:"system", content: prompt },
+        { role:"user", content: query }
+      ],
+      temperature: 1,
+      top_p: 1,
+      model: model
+    });
 
-  // Contact information
-  const contactKeywords = ['contact', 'email', 'phone', 'reach', 'call', 'mobile', 'number', 'address', 'text'];
-  if (contactKeywords.some((word) => lowerQuery.includes(word))) {
-    return 'Contact';
-  }
-
-  // Default fallback
-  return 'Unknown';
+  return response.choices[0].message.content;
 }
+
+genAIResponse().catch((err) => {
+  console.error("The sample encountered an error:", err);
+});

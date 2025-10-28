@@ -38,6 +38,7 @@ html, body {
 
 .message {
   display: flex;
+  overflow-wrap: break-word;
 }
 
 .message.user {

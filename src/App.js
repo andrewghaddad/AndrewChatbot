@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Chat from './components/Chat';
 import Footer from './components/Footer';
-import { detectIntent } from './services/intent-service';
+import { genAIResponse } from './services/intent-service';
 import { useIOSKeyboardFix } from './hooks/useIOSKeyboardFix';
 import './App.css';
 
@@ -32,15 +32,29 @@ function App() {
     setMessages((prev) => [...prev, userMsg]);
 
     // Simulate bot response
+    // Add typing indicator
+    const typingMsg = {
+      id: messages.length + 2,
+      sender: 'bot',
+      text: 'Virtual Assistant is typing...',
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    };
+    setMessages((prev) => [...prev, typingMsg]);
+
     setTimeout(() => {
+      // Replace typing indicator with actual bot response
       const botMsg = {
-        id: messages.length + 2,
+        id: messages.length + 3,
         sender: 'bot',
-        text: detectIntent(text),
+        text: genAIResponse(text),
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
-      setMessages((prev) => [...prev, botMsg]);
-    }, 800);
+      setMessages((prev) => {
+        const updatedMessages = [...prev];
+        updatedMessages.pop(); // Remove typing indicator
+        return [...updatedMessages, botMsg];
+      });
+    }, 800); // Simulate delay for typing
   };
 
   return (
