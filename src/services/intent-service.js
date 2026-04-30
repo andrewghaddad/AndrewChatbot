@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import { prompt } from "../prompts";
 
-const token = process.env.REACT_APP_GITHUB_TOKEN;
+const token = process.env.REACT_APP_GITHUB_TOKEN || "";
 const endpoint = "https://models.github.ai/inference";
 const model = "openai/gpt-4.1";
 
