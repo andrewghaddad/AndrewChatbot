@@ -1,7 +1,0 @@
-[build]
-    functions = "netlift/functions"
-
-[[redirects]]
-    from = "/api/*"
-    to = "./netlify/function/:splat"
-    status = 200
