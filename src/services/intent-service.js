@@ -6,7 +6,7 @@ export async function genAIResponse(query) {
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
-    return data.message;
+    return data.result;
   } catch (err) {
     console.error("The sample encountered an error:", err);
   }
