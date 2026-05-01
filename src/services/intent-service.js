@@ -1,26 +1,15 @@
-import OpenAI from "openai";
-import { prompt } from "../prompts";
-
-const token = process.env.REACT_APP_GITHUB_TOKEN;
-const endpoint = "https://models.github.ai/inference";
-const model = "openai/gpt-4.1";
-
 export async function genAIResponse(query) {
-  if (query == null) return;
-  
-  const client = new OpenAI({ baseURL: endpoint, apiKey: token, dangerouslyAllowBrowser: true });
+  if (!query) return;
 
-  const response = await client.chat.completions.create({
-    messages: [
-        { role:"system", content: prompt },
-        { role:"user", content: query }
-      ],
-      temperature: 1,
-      top_p: 1,
-      model: model
-    });
+  const apiUrl = `https://andrewprojectservices.netlify.app/.netlify/functions/query?query=${encodeURIComponent(query)}`;
 
-  return response.choices[0].message.content;
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    return data.result;
+  } catch (err) {
+    console.error("The sample encountered an error:", err);
+  }
 }
 
 genAIResponse().catch((err) => {
